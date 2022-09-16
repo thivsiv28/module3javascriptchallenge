@@ -97,6 +97,11 @@ button[disabled] {
   float: right;
 }
 
+.hiddeninput {
+  display: none;
+}
+
+
 #password {
   -webkit-appearance: none;
   -moz-appearance: none;

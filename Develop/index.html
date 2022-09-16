@@ -23,6 +23,13 @@
             placeholder="Your Secure Password"
             aria-label="Generated Password"
           ></textarea>
+          <div id="lengthinputcontainer" class="hiddeninput">
+          <input type="number" id="lengthinput" name="length" min="8" max="128">
+          <p id="number-next">Next</p>
+        </div>
+        <div id="lowercase" class="hiddeninput">
+          <input type="checkbox" id="lowercaseinput"/>
+          <p id="lowercaseinputnext">Next</p>
         </div>
         <div class="card-footer">
           <button id="generate" class="btn">Generate Password</button>
