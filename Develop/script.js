@@ -8,11 +8,9 @@ var lowerLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "
 
 var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-var specialCharacters = []
-// var passwordOptions = function () {
+var specialCharacters = ["!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"];
 
-//   var userchoice = window.prompt ("How many characters would you like your password to be?");
-// }
+var allCharacters = "";
 
 var generateBtn = document.querySelector("#generate");
 
@@ -70,31 +68,48 @@ function promptNumbers ({passwordLength, isLowerCase, isUpperCase})
   if (wantNumbers == "yes") {
     isNumbers=true;
   }
+
+  promptSpecialCharacters({passwordLength, isLowerCase, isNumbers, isUpperCase})
 }
 
+function promptSpecialCharacters ({passwordLength, isLowerCase, isNumbers, isUpperCase,})
+{
+  const wantSpecialCharacters = prompt("Would you like special characters? (yes/no?)");
 
-// generateBtn.addEventListener("click", function () {
-  
-//   if (length < 8) {
-//     alert("Password length must be 8 characters minimum.");
-//   }
-  
-//   else (length > 128) {
-//     alert("Password length must be less than 128 characters");
-//   }
-  
-// });
+  let isSpecialCharacters = false;
+  if(wantSpecialCharacters == "yes") {
+    isSpecialCharacters=true;
+  }
+
+  writePassword ({passwordLength, isLowerCase, isNumbers, isUpperCase, isSpecialCharacters});
+}
+
 
 
 
 // Write password to the #password input
-// function writePassword() {
-//   var password = generatePassword();
-//   var passwordText = document.querySelector("#password");
 
-//   passwordText.value = password;
+function writePassword({passwordLength, isLowerCase, isNumbers, isUpperCase, isSpecialCharacters})
+ {
+  var password = generatePassword({passwordLength, isLowerCase, isNumbers, isUpperCase, isSpecialCharacters});
+  var passwordText = document.querySelector("#password");
+  
 
-// }
+  passwordText.value = password;
+
+}
+
+function generatePassword({passwordLength, isLowerCase, isNumbers, isUpperCase, isSpecialCharacters})
+{
+  let numberOfCriteria = 0;
+  for (let i=0; i<passwordLength; i++)
+  {
+    pwd += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length))
+  }
+  
+}
+
+return numberOfCriteria
 
 function showLengthSelector(){
   var lengthSelectorDiv = document.querySelector("#lengthinputcontainer");
