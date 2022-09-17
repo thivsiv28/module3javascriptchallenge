@@ -97,6 +97,7 @@ button[disabled] {
   float: right;
 }
 
+/* added hidden input class to div elements around input tags */
 .hiddeninput {
   display: none;
 }
