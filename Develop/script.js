@@ -2,15 +2,16 @@
 
 //adding variables for all the character options
 
-var upperLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
+const upperLetters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"];
 
-var lowerLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
+const lowerLetters = ["a", "b", "c", "d", "e", "f", "g", "h", "i","j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "x", "y", "z"];
 
-var numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const numbers = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-var specialCharacters = ["!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"];
+// var specialCharacters = ["!\"#$%&'()*+,-./:;<=>?@[\]^_`{|}~"];
 
-var allCharacters = "";
+const specialCharacters = ["$", "%", "&", "*", "#", ">"];
+
 
 var generateBtn = document.querySelector("#generate");
 
@@ -27,7 +28,13 @@ function promptPasswordLength () {
     promptPasswordLength ();
   }
 
-  else {
+ else if (isNaN(passwordLength) == true) {
+
+  alert ("Enter a valid integer");
+  promptPasswordLength ();
+ }
+
+  else { 
     promptUpperCase ({passwordLength});
   }
 
@@ -101,15 +108,72 @@ function writePassword({passwordLength, isLowerCase, isNumbers, isUpperCase, isS
 
 function generatePassword({passwordLength, isLowerCase, isNumbers, isUpperCase, isSpecialCharacters})
 {
-  let numberOfCriteria = 0;
-  for (let i=0; i<passwordLength; i++)
-  {
-    pwd += allCharacters.charAt(Math.floor(Math.random() * allCharacters.length))
+  let chunks = 0;
+  let lowerCasePass = "";
+  let upperCasePass = "";
+  let numberPass="";
+  let specialCharPass ="";
+
+  if (isLowerCase == true) {
+  lowerCasePass = generateSimplePass (passwordLength,lowerLetters);
+    chunks= chunks+1;
   }
-  
+
+  if(isNumbers == true) {
+    numberPass = generateSimplePass (passwordLength,numbers);
+
+    chunks= chunks+1;
+  }
+
+  if(isUpperCase == true) {
+    upperCasePass = generateSimplePass (passwordLength,upperLetters);
+
+    chunks= chunks+1;
+  }
+
+  if(isSpecialCharacters == true) {
+    specialCharPass = generateSimplePass (passwordLength,specialCharacters);
+
+    chunks= chunks+1;
+  }
+ 
+  if (chunks ==0) {
+    alert ("You must enter yes for at lease one criteria");
+    return "click generate password to try again" ;
+  }
+
+  let chunkLength = passwordLength/chunks;
+
+  let chunkRemainder= passwordLength%chunks;
+
+  let randomPassword= "";
+debugger
+  randomPassword=randomPassword + lowerCasePass.substring(0,chunkLength);
+  randomPassword=randomPassword + upperCasePass.substring(0,chunkLength);
+  randomPassword=randomPassword + numberPass.substring(0,chunkLength);
+  randomPassword=randomPassword + specialCharPass.substring(0,chunkLength);
+randomPassword=randomPassword + randomPassword.substring (0,chunkRemainder);
+
+  return randomPassword;
+
 }
 
-return numberOfCriteria
+
+
+
+function generateSimplePass (passwordLength, candidateLetters) {
+
+  let randomPassword = "";
+  for (let i = 0; i < passwordLength; i++)
+  { 
+    let index = Math.floor(Math.random() * candidateLetters.length);
+    let character = candidateLetters[index];
+    randomPassword = randomPassword + character;
+  }
+  return randomPassword;
+}
+
+
 
 function showLengthSelector(){
   var lengthSelectorDiv = document.querySelector("#lengthinputcontainer");
