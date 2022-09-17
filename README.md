@@ -1,5 +1,5 @@
 # module3javascriptchallenge
-JavaScript Challenge: Password Generator
+# JavaScript Challenge: Password Generator
 
 This week's challenge was to modify the starter code to create an application that allows employees to generate random passwords based on the criteria  that they have selected. 
 
