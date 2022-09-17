@@ -9,7 +9,7 @@ This week's challenge was to modify the starter code to create an application th
 - Password that is generated matched the selected criteria
 
 ## Mock up:
-![The Password Generator application application.](./Assets/_C__Users_thivi_Desktop_challenge3_module3javascriptchallenge_Develop_index.html.png)
+![The Password Generator application application.](./Assets/finalmockup.png)
 
 ## Deployed Link:
 
